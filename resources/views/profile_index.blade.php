@@ -14,10 +14,11 @@
     <meta property="og:title" content="" />
     <meta property="og:url" content="" />
     <meta property="og:description" content="" />   
-    
+    <link rel="icon" href="{{asset('img/navbar/kgplogo1.png')}}" sizes="32x32" type="image/gif"/>
       <!-- ==============================================
     CSS
     =============================================== -->
+    
     <link type="text/css" href="{{ asset('css/demos/photo.css') }}" rel="stylesheet" />
     <link type="text/css" href="{{ asset('css/demos/timeline.css') }}" rel="stylesheet" />
 
@@ -78,7 +79,7 @@
 
     <div class="profile-avatar">
       <div class="profile-photo">
-        <img src="<?php if (!empty(Auth::user()->pro_pic)){echo Auth::user()->pro_pic; } else { echo 'img/shot.jpg';}?>" alt="" class="profile-img">
+        <img src="<?php if (!empty(Auth::user()->pro_pic)){echo Auth::user()->pro_pic; } else { echo 'index.png';}?>" alt="" class="profile-img">
         <div class="profile-name">{{Auth::user()->name}}</div>
       </div>
       <div class="caption">

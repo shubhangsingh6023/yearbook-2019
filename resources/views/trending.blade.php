@@ -15,6 +15,7 @@
       <meta property="og:url" content="" />
       <meta property="og:description" content="" />  
       <meta name="csrf-token" content="{{ csrf_token() }}">   
+      <link rel="icon" href="{{asset('img/navbar/kgplogo1.png')}}" sizes="32x32" type="image/gif"/>
     
     <!-- ==============================================
     Favicons
@@ -137,6 +138,61 @@ body{
    Navbar Second Section
    =============================================== -->
     
+   <!-- ==============================================
+   Modal Section
+   =============================================== -->
+   <div id="myModal" class="modal fade">
+    <div class="modal-dialog">
+     <div class="modal-content">
+      <div class="modal-body">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+         <span aria-hidden="true">×</span>
+         <span class="sr-only">Close</span>
+       </button>
+       <div class="row">
+         
+        <div class="col-md-8 modal-image">
+          <img class="img-responsive enlargeImageModalSource" src="" alt="Image"/>
+        </div><!--/ col-md-8 -->
+        <div class="col-md-4 modal-meta">
+         <div class="modal-meta-top">
+          <div class="img-poster clearfix">
+           <a href="" id="profile">
+            <img class="img-responsive img-circle" id="image" src="" />
+            <strong><span style="font-size: 14px;" id="posted_by"></span></strong>
+          </a>
+          <span id="created_at"></span><br/>
+        </div><!--/ img-poster -->
+        <div id="comments"> 
+        </div>
+        
+        <div class="modal-meta-bottom">     
+          <span class="thumb-xs">
+            @if(!empty(Auth::user()->pro_pic))
+            <img class="img-fluid img-circle" src="{{Auth::user()->pro_pic}}" style="width: 35px; height: 35px;" alt="Image">
+            @endif       
+          </span>
+          <div class="comment-body">
+            <form class="form" id="form-comment" action="{{ url('/comment') }}" method="post">
+              {{csrf_field()}}
+              <input id="comment-token" type="hidden" name="_token" value="{{ csrf_token() }}">
+              <textarea name="comment" id="textarea" class="form-control input-sm" rows="2" type="text" placeholder="Write your comment..." required></textarea>
+              <div align="right">
+                <button class="btn" id="submit" style="margin-top: 10px;"><span>Comment</span></button>
+              </div>
+            </form>
+          </div><!--/ comment-body -->        
+        </div><!--/ modal-meta-bottom -->
+
+      </div><!--/ modal-meta-top -->
+    </div><!--/ col-md-4 -->
+    
+  </div><!--/ row -->
+</div><!--/ modal-body -->
+
+</div><!--/ modal-content -->
+</div><!--/ modal-dialog -->
+</div><!--/ modal -->
   
    <!-- ==============================================
    News Feed Section
@@ -245,7 +301,7 @@ body{
                                               <textarea name="comment" id="textarea" class="form-control input-sm" rows="1" type="text" placeholder="Write your comment..." required></textarea>
                                           <!-- </li>
                                           <li>  -->
-                                              <button  style="height : 20%;width:30%; margin-right : 15vh;float:left; margin-top : 3vh;color:red;border-radius:3px;border:0px solid white;">	<i class="material-icons" id="submit" style = " font-size:28px;color:gray">send</i> </button>
+                                              <button class="comment_btn" style="height : 20%;width:30%; margin-right : 15vh;float:left; margin-top : 3vh;color:red;border-radius:3px;border:0px solid white;">	<i class="material-icons" id="submit" style = " font-size:28px;color:gray">send</i> </button>
                                           <!-- </li>
                                         </ul>   -->
                                       </form>
@@ -307,8 +363,6 @@ body{
                 @endif
           </div>   
     </div>
-
-    @endsection
     <button onclick="topFunction()" id="myBtn" title="Go to top"><i class = "fa fa-chevron-circle-up" style = "font-size : 28px"></i><br><br>Scroll to top!</button>   
   </div>       
    <!-- ==============================================
@@ -460,6 +514,7 @@ function topFunction() {
         'pic_id' : $('.enlargeImageModalSource').attr('id'),
         '_token' : $('#comment-token').val()
       } 
+ 
       $.ajax({
         url: "{{ url('/commentadd') }}",
         type: "POST",
@@ -580,5 +635,6 @@ function topFunction() {
     
   </script>
   
+  @endsection
   </body>
 </html>
